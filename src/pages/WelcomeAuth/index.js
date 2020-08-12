@@ -5,7 +5,10 @@ import ActionButton from './ActionButton';
 import {colors} from '../../utils/colors';
 import {welcomeAuth} from '../../assets';
 
-const WelcomeAuth = () => {
+const WelcomeAuth = ({navigation}) => {
+  const handleGoTo = (screen) => {
+    navigation.navigate(screen);
+  };
   return (
     <View style={styles.wrapper.page}>
       <Image source={welcomeAuth} style={styles.wrapper.illustration} />
@@ -13,10 +16,12 @@ const WelcomeAuth = () => {
       <ActionButton
         desc="Silahkan pilih Login jika anda telah memiliki akun"
         title="Login"
+        onPress1={() => handleGoTo('Login')}
       />
       <ActionButton
         desc="atau silahkan Register jika belum memiliki akun"
         title="Register"
+        onPress1={() => handleGoTo('Register')}
       />
     </View>
   );
