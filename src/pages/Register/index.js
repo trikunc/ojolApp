@@ -1,15 +1,35 @@
-import React from 'react';
-import {View, Text} from 'react-native';
-import {Input} from '../../components';
+import React, {useState} from 'react';
+import {View, Text, ScrollView} from 'react-native';
+import {Input, Button} from '../../components';
 import {colors} from '../../utils/colors';
 import {IconBack, RegisterImage} from '../../assets';
 
 const Register = () => {
+  const [form, setForm] = useState({
+    fullName: '',
+    email: '',
+    password: '',
+  });
+
+  const sendData = () => {
+    console.log('data yg dikirim: ', form);
+  };
+
+  const onInputChange = (value, inputForm) => {
+    setForm({
+      ...form,
+      [inputForm]: value,
+    });
+  };
+
   return (
     <View style={styles.wrapper.page}>
       <IconBack width={25} height={25} />
-      <View style={{alignItems: 'center'}}>
-        {/* <View style={styles.illustration} /> */}
+      <ScrollView
+        style={{
+          flexDirection: 'column',
+          alignSelf: 'center',
+        }}>
         <RegisterImage
           width={200}
           height={126.46}
@@ -19,19 +39,40 @@ const Register = () => {
           Mohon mengisi beberapa data untuk mproses Regsiter anda
         </Text>
         <View style={styles.space(30)} />
-        <Input placeholder="Full Name" />
+        <Input
+          placeholder="Full Name"
+          value={form.fullName}
+          onChangeText={(value) => onInputChange(value, 'fullName')}
+        />
         <View style={styles.space(5)} />
-        <Input placeholder="Email" />
+        <Input
+          placeholder="Email"
+          value={form.email}
+          onChangeText={(value) => onInputChange(value, 'email')}
+        />
         <View style={styles.space(5)} />
-        <Input placeholder="Password" />
-      </View>
+        <Input
+          placeholder="Password"
+          value={form.password}
+          onChangeText={(value) => onInputChange(value, 'password')}
+          secureTextEntry={true}
+        />
+        <View style={styles.space(40)} />
+        <View
+          style={{
+            alignSelf: 'center',
+            minWidth: 225,
+          }}>
+          <Button title="Register" onPress={sendData} />
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = {
   wrapper: {
-    page: {padding: 30},
+    page: {padding: 20, flexDirection: 'column'},
   },
   illustration: {
     marginTop: 12,

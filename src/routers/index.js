@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export class Router extends Component {
   render() {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Register">
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen
           name="Login"
